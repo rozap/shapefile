@@ -143,7 +143,7 @@ function convertPoint(record) {
 }
 
 function convertPolyLine(record) {
-  return record.parts.length === 1 ? {
+  return record.parts.length <= 1 ? {
     type: "LineString",
     coordinates: record.points
   } : {
