@@ -88,8 +88,16 @@ var fieldTypes = {
   N: fieldNumber
 };
 
+function isEmptyString(d) {
+  return d === '' || d.trim() === '';
+}
+
 function fieldNumber(d) {
-  return isNaN(d = +d) ? null : d;
+  if (isEmptyString(d) || isNaN(d = +d)) {
+    return null;
+  } else {
+    return d;
+  }
 }
 
 function fieldString(d) {
@@ -97,7 +105,11 @@ function fieldString(d) {
 }
 
 function fieldDate(d) {
-  return new Date(+d.substring(0, 4), d.substring(4, 6) - 1, +d.substring(6, 8));
+  if (isEmptyString(d)) {
+    return null;
+  } else {
+    return new Date(+d.substring(0, 4), d.substring(4, 6) - 1, +d.substring(6, 8));
+  }
 }
 
 function fieldBoolean(d) {
